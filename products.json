@@ -1,0 +1,191 @@
+[
+  {
+    "id": 11213,
+    "name": "Earthy Jasper",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/564x/6d/06/16/6d0616ae6200700f26027f6d8dbda8fc.jpg",
+    "price": 30,
+    "quantity": 0,
+    "bio": "Discover our stunning collection of handmade accessories, crafted with natural stones and organic materials."
+  },
+  {
+    "id": 267,
+    "name": "Crystal Quartz Delight",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/564x/ee/a8/df/eea8dffa8e9242f384e709f2f8045eca.jpg",
+    "price": 50,
+    "quantity": 6,
+    "bio": "Explore the enchanting world of crystal quartz with our delightful handmade bracelets."
+  },
+  {
+    "id": 4124,
+    "name": "Amethyst Serenity",
+    "type": "necklace",
+    "picture": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fc7%2F2c%2F48%2Fc72c480853c11c0fc4c08789654dd732.jpg&f=1&nofb=1&ipt=2c91bcb7a02647182bff2ba093fa188626654ca8fa42c0776d1ce3e58e111e46&ipo=images",
+    "price": 15,
+    "quantity": 0,
+    "bio": "Immerse yourself in the serene beauty of our handmade amethyst necklaces, a perfect blend of elegance and tranquility."
+  },
+  {
+    "id": 664,
+    "name": "Rose Quartz Elegance",
+    "type": "necklace",
+    "picture": "https://i.pinimg.com/564x/60/c0/e6/60c0e6525063fabd5fb78f25be701bd4.jpg",
+    "price": 12,
+    "quantity": 23,
+    "bio": "Indulge in the elegance of rose quartz with our exquisite handmade necklaces, a symbol of love and beauty."
+  },
+  {
+    "id": 789,
+    "name": "Ocean Blue Harmony",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/originals/69/c3/35/69c335b56629a005829d1a6d7987f56d.jpg",
+    "price": 35,
+    "quantity": 8,
+    "bio": "Dive into the soothing vibes of ocean blue with our harmonious handmade bracelets, a blend of style and tranquility."
+  },
+  {
+    "id": 543,
+    "name": "Golden Sunlight Radiance",
+    "type": "earrings",
+    "picture": "https://i.pinimg.com/564x/54/c0/b8/54c0b8c1572df6c27a9dbcb7f5e2a476.jpg",
+    "price": 25,
+    "quantity": 15,
+    "bio": "Illuminate your style with the radiant beauty of golden sunlight in our handmade earrings, a symbol of positivity and energy."
+  },
+  {
+    "id": 987,
+    "name": "Mystic Moonstone Magic",
+    "type": "necklace",
+    "picture": "https://i.pinimg.com/736x/48/64/45/4864457f2d577d13ec9a2a32f04b9c3d.jpg",
+    "price": 18,
+    "quantity": 5,
+    "bio": "Experience the mystical allure of moonstone with our magical handmade necklaces, a unique blend of charm and spirituality."
+  },
+  {
+    "id": 234,
+    "name": "Sapphire Sky Dreams",
+    "type": "ring",
+    "picture": "https://i.pinimg.com/564x/23/77/02/237702d9be36f44a64f08ac11f03c1b4.jpg",
+    "price": 40,
+    "quantity": 10,
+    "bio": "Embark on a journey of dreams with our handmade sapphire rings, capturing the essence of a clear blue sky."
+  },
+  {
+    "id": 876,
+    "name": "Emerald Enchantment",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/originals/f1/b8/72/f1b87231fb2ddf96404fa9cadd388e03.jpg",
+    "price": 28,
+    "quantity": 18,
+    "bio": "Be enchanted by the vibrant green allure of emeralds in our handmade bracelets, a symbol of renewal and prosperity."
+  },
+  {
+    "id": 345,
+    "name": "Citrine Sunshine Glow",
+    "type": "earrings",
+    "picture": "https://i.pinimg.com/564x/34/1c/86/341c860d43e42bb282a91bb3f303d8da.jpg",
+    "price": 22,
+    "quantity": 7,
+    "bio": "Radiate sunshine wherever you go with our handmade citrine earrings, capturing the warm and positive energy of the sun."
+  },
+  {
+    "id": 5432,
+    "name": "Amber Serenade",
+    "type": "necklace",
+    "picture": "https://i.pinimg.com/736x/36/9d/cc/369dcca1dc13fc3a190875b5abf67a9e.jpg",
+    "price": 20,
+    "quantity": 3,
+    "bio": "Immerse yourself in the rich amber hues of our handmade necklaces, a serenade to warmth and timeless beauty."
+  },
+  {
+    "id": 8765,
+    "name": "Lapis Lazuli Dreamscape",
+    "type": "ring",
+    "picture": "https://i.pinimg.com/564x/87/27/35/8727356855b4fe92991eead38b6956d4.jpg",
+    "price": 38,
+    "quantity": 9,
+    "bio": "Explore a dreamscape of deep blue enchantment with our handmade Lapis Lazuli rings, a perfect blend of elegance and mystery."
+  },
+  {
+    "id": 9876,
+    "name": "Onyx Nightfall Beauty",
+    "type": "necklace",
+    "picture": "https://i.pinimg.com/736x/91/c6/01/91c6011c5e3091294ebbd79e263cd42e.jpg",
+    "price": 32,
+    "quantity": 14,
+    "bio": "Adorn yourself in the nightfall beauty of onyx with our handmade necklaces, an expression of timeless sophistication."
+  },
+  {
+    "id": 6543,
+    "name": "Topaz Twilight Sparkle",
+    "type": "earrings",
+    "picture": "https://i.pinimg.com/564x/65/88/7a/65887a2f2ba93f3d4a062efaa702a5d5.jpg",
+    "price": 26,
+    "quantity": 20,
+    "bio": "Sparkle with the twilight magic of topaz in our handmade earrings, a symbol of clarity and positive energy."
+  },
+  {
+    "id": 210,
+    "name": "Garnet Passion Glow",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/originals/69/5c/23/695c23be8ea5bb2fd1a651ba4a660427.jpg",
+    "price": 24,
+    "quantity": 11,
+    "bio": "Ignite the passion within with our handmade garnet bracelets, capturing the deep red glow of love and desire."
+  },
+  {
+    "id": 8765,
+    "name": "Pearl Elegance Symphony",
+    "type": "necklace",
+    "picture": "https://i.pinimg.com/736x/c6/d3/50/c6d350a9562ed599ec7a4eaaf90a4777.jpg",
+    "price": 42,
+    "quantity": 5,
+    "bio": "Experience a symphony of elegance with our handmade pearl necklaces, a timeless expression of grace and sophistication."
+  },
+  {
+    "id": 4321,
+    "name": "Opal Radiance Magic",
+    "type": "ring",
+    "picture": "https://i.pinimg.com/564x/43/bf/e7/43bfe7b19bf76bf6523d301313e8eb14.jpg",
+    "price": 36,
+    "quantity": 8,
+    "bio": "Dive into the magical radiance of opal with our handmade rings, a celebration of ever-changing colors and mystique."
+  },
+  {
+    "id": 5432,
+    "name": "Turquoise Tranquility",
+    "type": "bracelet",
+    "picture": "https://i.pinimg.com/originals/bd/86/4b/bd864b854c6f31d39c9d553282206713.png",
+    "price": 29,
+    "quantity": 17,
+    "bio": "Find tranquility in the calming shades of turquoise with our handmade bracelets, a symbol of peace and serenity."
+  },
+  {
+    "id": 7890,
+    "name": "Ruby Red Passion",
+    "type": "earrings",
+    "picture": "https://i.pinimg.com/564x/78/cf/23/78cf23665d77a1daa343c8326b0df67e.jpg",
+    "price": 23,
+    "quantity": 12,
+    "bio": "Ignite your passion with the deep red hues of rubies in our handmade earrings, a symbol of love and intensity."
+  },
+  {
+    "id": 1234,
+    "name": "Moonlit Silver Symphony",
+    "type": "necklace",
+    "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFUE9-OOwnlqUNIuBZj6DD1iQbZXTadzOY4w&usqp=CAU",
+    "price": 48,
+    "quantity": 9,
+    "bio": "Adorn yourself in the moonlit symphony of silver with our handmade necklaces, an expression of timeless grace and sophistication."
+  },
+  {
+    "id": 5678,
+    "name": "Sunstone Energy Earrings",
+    "type": "earrings",
+    "picture": "https://i.pinimg.com/564x/56/02/57/5602578c6766671ab9f7419df8e43860.jpg",
+    "price": 27,
+    "quantity": 15,
+    "bio": "Energize your style with the warm hues of sunstone in our handmade earrings, capturing the positive energy of the sun."
+  }
+]

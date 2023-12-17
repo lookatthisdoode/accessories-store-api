@@ -1,0 +1,16 @@
+GET http://localhost:5000/products
+
+###
+
+POST http://localhost:5000/sendorder HTTP/1.1
+Content-Type: application/json
+
+[{ 
+    "product": {
+        "name": "test product",
+        "price": 23
+    },
+    "quantity": 1 
+}]
+
+###
