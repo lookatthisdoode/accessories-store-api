@@ -3,6 +3,7 @@ const cors = require("cors")
 const app = express()
 const fs = require("fs")
 const path = require("path")
+const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(cors())
@@ -66,6 +67,6 @@ app.post("/sendorder", (req, res) => {
     : res.json("Some error had happened, order was not placed")
 })
 
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log("Server: accesories API is running on port 5000")
 })
