@@ -2,6 +2,11 @@ GET http://localhost:5000/products
 
 ###
 
+GET http://localhost:5000/getorders
+
+###
+
+
 POST http://localhost:5000/sendorder HTTP/1.1
 Content-Type: application/json
 
@@ -14,3 +19,14 @@ Content-Type: application/json
 }]
 
 ###
+
+POST https://accesories-store-api-83f92813ccbf.herokuapp.com/sendorder HTTP/1.1
+Content-Type: application/json
+
+[{ 
+    "product": {
+        "name": "test product",
+        "price": 23
+    },
+    "quantity": 1 
+}]

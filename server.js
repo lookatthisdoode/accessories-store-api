@@ -1,45 +1,93 @@
+require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
+const { MongoClient, ServerApiVersion } = require("mongodb")
 const app = express()
-const fs = require("fs")
-const path = require("path")
-const port = process.env.PORT || 5000
+
+const URI = process.env.DB_URI
+const PORT = process.env.PORT || 5000
+
+const client = new MongoClient(URI, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+})
+const database = client.db("accesories-store")
 
 app.use(express.json())
 app.use(cors())
 
-//temporary saving to file, later will be database
-function saveOrderToFile(data) {
-  // Create a directory if it doesn't exist
-  const directoryPath = "./orders"
-  if (!fs.existsSync(directoryPath)) {
-    fs.mkdirSync(directoryPath)
+async function getAllProducts() {
+  try {
+    await client.connect()
+
+    // Access the database and collection
+
+    const collection = database.collection("products")
+
+    // Query to get all products
+    const products = await collection.find({}).toArray()
+
+    return products
+  } finally {
+    await client.close()
   }
+}
 
-  // Convert to 'YYYY-MM-DD HH:mm:ss' format
-  const currentDate = new Date()
-    .toISOString()
-    .replace(/T/, " ")
-    .replace(/\..+/, "")
+async function getAllOrders() {
+  try {
+    await client.connect()
 
-  // Create the file path
-  const filePath = path.join(directoryPath, `${currentDate}.txt`)
+    // Access the database and collection
 
-  // Convert the object to a JSON string
-  const jsonString = JSON.stringify(data, null, 2) // 2 is for indentation
+    const collection = database.collection("orders")
 
-  // Add the ID of customer and append to jsonString
-  //jsonString.concat(customer)
+    // Query to get all orders
+    const orders = await collection.find({}).toArray()
 
-  // Write the JSON string to the file
-  fs.writeFileSync(filePath, jsonString, "utf-8")
+    return orders
+  } finally {
+    await client.close()
+  }
+}
 
-  console.log(`Data has been written to ${filePath}`)
+async function saveOrder(data) {
+  try {
+    await client.connect()
+
+    // Access the 'accessories-api' database and 'orders' collection
+
+    const ordersCollection = database.collection("orders")
+
+    // Insert the data into the 'orders' collection
+    const result = await ordersCollection.insertOne(data)
+
+    console.log(`Order has been saved to MongoDB with ID: ${result.insertedId}`)
+  } finally {
+    await client.close()
+  }
 }
 
 app.get("/products", (req, res) => {
-  const products = require("./products.json")
-  res.json(products)
+  getAllProducts()
+    .then((products) => {
+      res.json(products)
+    })
+    .catch((error) => {
+      console.error("Error:", error)
+    })
+})
+
+app.get("/getorders", (req, res) => {
+  getAllOrders()
+    .then((orders) => {
+      res.json(orders)
+    })
+    .catch((error) => {
+      console.error("Error:", error)
+    })
 })
 
 app.get("/", (req, res) => {
@@ -47,6 +95,11 @@ app.get("/", (req, res) => {
 })
 
 app.post("/sendorder", (req, res) => {
+  const currentDate = new Date()
+    .toISOString()
+    .replace(/T/, " ")
+    .replace(/\..+/, "")
+
   let totalPrice = 0
   let newOrder = {
     items: req.body.reduce((acc, item) => {
@@ -54,19 +107,16 @@ app.post("/sendorder", (req, res) => {
       acc[item.product.name] = item.quantity
       return acc
     }, {}),
+    orderDate: currentDate,
     totalPrice: `${totalPrice}.00$`,
   }
 
-  //add logic to save to database or some orders handler
-
   //check if new order exist
   newOrder
-    ? (console.log("Server: You have got a new order:\n", newOrder),
-      saveOrderToFile(newOrder),
-      res.json("Succesfully placed and order"))
-    : res.json("Some error had happened, order was not placed")
+    ? (saveOrder(newOrder), res.json("Succesfully placed and order"))
+    : res.status(500).json("Some error had happened, order was not placed")
 })
 
-app.listen(port, () => {
-  console.log("Server: accesories API is running on port 5000")
+app.listen(PORT, () => {
+  console.log(`Server: accesories API is running on port: ${PORT}`)
 })
