@@ -1,5 +1,6 @@
 # Accesories Store API
-[Live Preview](https://lookatthisdoode.github.io/accesories-store-vite](https://accesories-store-api-83f92813ccbf.herokuapp.com)
+
+[Live Preview](https://accesories-store-api-83f92813ccbf.herokuapp.com)
 
 This API is designed to communicate with MongoDB, retrieve products, save orders to the database, and provides a debug page for managing products and viewing orders.
 
@@ -35,7 +36,6 @@ This API is designed to communicate with MongoDB, retrieve products, save orders
 2. Install dependencies: `npm install`
 3. Set up your MongoDB connection by configuring the environment variables.
 4. Start the API: `npm start`
-
 
 Access the debug page at `/debug` to perform the following actions:
 
