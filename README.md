@@ -1,4 +1,5 @@
 # Accesories Store API
+[Live Preview](https://lookatthisdoode.github.io/accesories-store-vite](https://accesories-store-api-83f92813ccbf.herokuapp.com)
 
 This API is designed to communicate with MongoDB, retrieve products, save orders to the database, and provides a debug page for managing products and viewing orders.
 
