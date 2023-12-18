@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debug Page</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      #app {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        margin-bottom: 5px;
+      }
+
+      input,
+      select {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="submit"] {
+        background-color: #008cba;
+        color: #fff;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #007baa;
+      }
+
+      #result {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Debug Page</h1>
+
+    <div id="app"></div>
+
+    <script>
+      const appDiv = document.getElementById("app")
+
+      const render = () => {
+        appDiv.innerHTML = `
+        <button onclick="getOrders()">Get Orders</button>
+        <button onclick="getProducts()">Get Products</button>
+        <button onclick="showAddProductForm()">Add Product</button>
+        <div id="result"></div>
+        <div id="addProductForm" style="display:none;">
+          <h2>Add Product</h2>
+          <form onsubmit="addProduct(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+              <option value="bracelet">Bracelet</option>
+              <option value="necklace">Necklace</option>
+            </select><br>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required><br>
+
+            <label for="picture">Picture URL:</label>
+            <input type="text" id="picture" name="picture" required><br>
+
+            <label for="bio">Bio:</label>
+            <input type="text" id="bio" name="bio" required><br>
+
+            <input type="submit" value="Add Product">
+          </form>
+        </div>
+      `
+      }
+
+      const getOrders = async () => {
+        addProductForm.style.display = "none"
+        const response = await fetch("/getorders")
+        const data = await response.json()
+        displayOrders(data)
+      }
+
+      const getProducts = async () => {
+        addProductForm.style.display = "none"
+        const response = await fetch("/products")
+        const data = await response.json()
+        displayProducts(data)
+      }
+
+      const showAddProductForm = () => {
+        const resultDiv = document.getElementById("result")
+        resultDiv.innerHTML = ""
+        const addProductForm = document.getElementById("addProductForm")
+        addProductForm.style.display = "block"
+      }
+
+      const addProduct = async (event) => {
+        event.preventDefault()
+        const name = document.getElementById("name").value
+        const type = document.getElementById("type").value
+        const price = document.getElementById("price").value
+        const quantity = document.getElementById("quantity").value
+        const picture = document.getElementById("picture").value
+        const bio = document.getElementById("bio").value
+
+        const response = await fetch("/addproduct", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, type, price, quantity, picture, bio }),
+        })
+
+        const result = await response.json()
+        displayResult(result)
+
+        // Hide the form after submission
+        const addProductForm = document.getElementById("addProductForm")
+        addProductForm.style.display = "none"
+      }
+
+      const displayResult = (data) => {
+        const resultDiv = document.getElementById("result")
+        resultDiv.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>"
+      }
+
+      const displayOrders = (orders) => {
+        const resultDiv = document.getElementById("result")
+
+        // Clear previous content
+        resultDiv.innerHTML = ""
+
+        // Check if orders is an array
+        if (Array.isArray(orders) && orders.length > 0) {
+          orders.forEach((order) => {
+            // Create a card for each order
+            const orderCard = document.createElement("div")
+            orderCard.classList.add("order-card")
+
+            // Display relevant information in the card
+            const orderId = document.createElement("h3")
+            orderId.textContent = `Order ID: ${order._id}`
+
+            const orderDate = document.createElement("p")
+            orderDate.textContent = `Order Date: ${order.orderDate}`
+
+            const totalPrice = document.createElement("p")
+            totalPrice.textContent = `Total Price: ${order.totalPrice}`
+
+            const items = document.createElement("ul")
+            for (const itemName in order.items) {
+              const quantity = order.items[itemName]
+              const itemEntry = document.createElement("li")
+              itemEntry.textContent = `${itemName} - Quantity: ${quantity}`
+              items.appendChild(itemEntry)
+            }
+
+            // Append elements to the orderCard
+            orderCard.appendChild(orderId)
+            orderCard.appendChild(orderDate)
+            orderCard.appendChild(totalPrice)
+            orderCard.appendChild(items)
+
+            // Append the orderCard to the resultDiv
+            resultDiv.appendChild(orderCard)
+          })
+        } else {
+          // Display a message if orders is not an array or is empty
+          resultDiv.innerHTML = "<p>No orders available</p>"
+        }
+      }
+
+      const displayProducts = (data) => {
+        const resultDiv = document.getElementById("result")
+
+        // Clear previous content
+        resultDiv.innerHTML = ""
+
+        // Check if data is an array
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach((item) => {
+            // Create a card for each item
+            const card = document.createElement("div")
+            card.classList.add("card")
+
+            // Create a container for the card content using flexbox
+            const cardContentContainer = document.createElement("div")
+            cardContentContainer.style.display = "flex"
+
+            // Create a container for text content
+            const textContainer = document.createElement("div")
+            textContainer.style.flex = "1" // Set flex to take available space
+            textContainer.style.padding = "10px" // Add padding
+            textContainer.style.overflow = "hidden" // Ensure text doesn't overflow
+
+            // Display relevant information in the card
+            const name = document.createElement("h3")
+            name.textContent = `Name: ${item.name}`
+
+            const type = document.createElement("p")
+            type.textContent = `Type: ${item.type}`
+
+            const price = document.createElement("p")
+            price.textContent = `Price: $${item.price}`
+
+            const quantity = document.createElement("p")
+            quantity.textContent = `Quantity: ${item.quantity}`
+
+            // Append text elements to the text container
+            textContainer.appendChild(name)
+            textContainer.appendChild(type)
+            textContainer.appendChild(price)
+            textContainer.appendChild(quantity)
+
+            // Create a container for the image using flexbox
+            const imageContainer = document.createElement("div")
+            imageContainer.style.flex = "1" // Set flex to take available space
+            imageContainer.style.marginLeft = "10px" // Add margin between text and image
+            imageContainer.style.backgroundColor = "#333" // Set background color
+
+            // Add background image to the image container
+            imageContainer.style.backgroundImage = `url("${item.picture}")` // Add single or double quotes around the URL
+            imageContainer.style.backgroundSize = "cover" // Ensure the image covers the container
+            imageContainer.style.backgroundPosition = "center" // Center the background image
+            imageContainer.style.backgroundRepeat = "no-repeat" // Disable background repeat
+
+            // Append text container and image container to the card content container
+            cardContentContainer.appendChild(textContainer)
+            cardContentContainer.appendChild(imageContainer)
+
+            // Append the card content container to the card
+            card.appendChild(cardContentContainer)
+
+            // Add some styles to the card
+            card.style.border = "1px solid #ddd" // Add a border
+            card.style.borderRadius = "8px" // Add rounded corners
+            card.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)" // Add drop shadow
+            card.style.marginBottom = "15px" // Add margin to separate cards
+
+            // Append the card to the resultDiv
+            resultDiv.appendChild(card)
+          })
+        } else {
+          // Display a message if the data is not an array or is empty
+          resultDiv.innerHTML = "<p>No data available</p>"
+        }
+      }
+
+      render()
+    </script>
+  </body>
+</html>

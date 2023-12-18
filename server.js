@@ -3,7 +3,8 @@ const express = require("express")
 const cors = require("cors")
 const { MongoClient, ServerApiVersion } = require("mongodb")
 const app = express()
-
+const path = require("path")
+const { log } = require("console")
 const URI = process.env.DB_URI
 const PORT = process.env.PORT || 5000
 
@@ -19,6 +20,7 @@ const database = client.db("accesories-store")
 app.use(express.json())
 app.use(cors())
 
+// DB query functions
 async function getAllProducts() {
   try {
     await client.connect()
@@ -70,6 +72,27 @@ async function saveOrder(data) {
   }
 }
 
+async function addProduct(data) {
+  try {
+    await client.connect()
+
+    // Access the 'accessories-api' database and 'orders' collection
+
+    const ordersCollection = database.collection("products")
+
+    // Insert the data into the 'orders' collection
+    const result = await ordersCollection.insertOne(data)
+
+    console.log(
+      `Product has been saved to MongoDB with ID: ${result.insertedId}`
+    )
+  } finally {
+    await client.close()
+  }
+}
+
+// Endpoints
+
 app.get("/products", (req, res) => {
   getAllProducts()
     .then((products) => {
@@ -94,6 +117,10 @@ app.get("/", (req, res) => {
   res.json("hello, you`ve reached accesories-store-api")
 })
 
+app.get("/debug", (req, res) => {
+  res.sendFile(path.join(__dirname, "debug.html"))
+})
+
 app.post("/sendorder", (req, res) => {
   const currentDate = new Date()
     .toISOString()
@@ -115,6 +142,14 @@ app.post("/sendorder", (req, res) => {
   newOrder
     ? (saveOrder(newOrder), res.json("Succesfully placed and order"))
     : res.status(500).json("Some error had happened, order was not placed")
+})
+
+app.post("/addproduct", (req, res) => {
+  addProduct(req.body)
+    .catch((e) => {
+      console.log(e)
+    })
+    .finally(res.json(`Product ${req.body.name} has been added`))
 })
 
 app.listen(PORT, () => {
