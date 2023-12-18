@@ -114,7 +114,9 @@ app.get("/getorders", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-  res.json("hello, you`ve reached accesories-store-api")
+  res.json(
+    "hello, you`ve reached accesories-store-api, for some ui go to /debug"
+  )
 })
 
 app.get("/debug", (req, res) => {
