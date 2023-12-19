@@ -1,4 +1,4 @@
-# Accesories Store API
+# Accessories Store API
 
 [Live Preview](https://accesories-store-api-83f92813ccbf.herokuapp.com)
 
@@ -46,3 +46,4 @@ Access the debug page at `/debug` to perform the following actions:
 ## Contributing
 
 Feel free to contribute by opening issues or submitting pull requests. Your contributions are highly appreciated.
+
